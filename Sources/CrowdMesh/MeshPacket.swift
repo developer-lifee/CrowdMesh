@@ -8,6 +8,9 @@ public enum MeshPacketType: String, Codable {
     case computeOffer      // Anuncio de un nodo sobre cuánta RAM y potencia ofrece al cluster
     case computeJobAssign  // El coordinador envía un fragmento de tarea a un nodo
     case computeJobResult  // El nodo devuelve el resultado procesado
+    case modelManifest     // Anuncio P2P de un modelo de IA (.safetensors/.gguf/.mlmodelc) disponible en la red
+    case modelChunkRequest // Solicitud P2P para descargar un shard/chunk de un modelo desde un par cercano
+    case modelChunkData    // Envío directo de un fragmento binario del modelo entre dispositivos
 }
 
 /// Paquete con soporte para enrutamiento multi-salto (Multi-hop Mesh)

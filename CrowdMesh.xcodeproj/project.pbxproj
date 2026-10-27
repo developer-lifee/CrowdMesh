@@ -7,125 +7,128 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		069FDC5E51B51E0E267AD777 /* ComputeGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78F5890FE6E1AEC535FDEE0E /* ComputeGridView.swift */; };
-		0FE652D170F5965A3B64923E /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902FABE3F09060C0D4A61383 /* PhotosUI.framework */; };
-		11266D31D0593709A374677E /* FriendCustomizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A49003102A56750D0F848E3 /* FriendCustomizationStore.swift */; };
-		21D856C30D7C33B4696D81AA /* RadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE59F42A377ACCC4575393EC /* RadarView.swift */; };
-		3268E38A6FA9501D4AB0BFF2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B902358FBCFB40718341C13 /* Foundation.framework */; };
-		4472A9D5133B9BACEAC2AB64 /* DistributedComputeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D3C24E3D8097F32308A346 /* DistributedComputeEngine.swift */; };
-		44D988F27472836196CCCE84 /* MeshPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53869FCF107124FD780252F3 /* MeshPacket.swift */; };
-		53533ACE416D1FDB274621F8 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04DF4116ED9DB0655B0F778B /* CoreBluetooth.framework */; };
-		856B624503E985A9F23CAD24 /* CrowdMeshApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C743A58059879AB12C842B /* CrowdMeshApp.swift */; };
-		947605713D4BB0BC0530DAA2 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A540862592E75867BF6CC48 /* MultipeerConnectivity.framework */; };
-		A65FF1A89A8E098741A1DE90 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D771CA92F40D7B5FAD0834 /* MainTabView.swift */; };
-		B7C0B3E2842EC1DD4317F3B0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D589BD68E02A139A1C718F08 /* SwiftUI.framework */; };
-		BAFC7B429DB065BC045DD0DE /* MeshNetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0E05E1571B03CE2F01B284 /* MeshNetworkEngine.swift */; };
-		D65E105314CD59C07664516A /* MeshChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF1A362F68BC5E9BADA3D06 /* MeshChatView.swift */; };
-		D6701FC9FF11B69B374FD33B /* DeviceResourceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660A84A8B7AE5CC6C9A7531F /* DeviceResourceMonitor.swift */; };
-		DB96387DE600D5DC365553A2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D16CF217A0B77B874CDA29 /* SettingsView.swift */; };
+		07C910448678F57ED0A45780 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B8A9DD8AFE533E62C637494 /* SwiftUI.framework */; };
+		174650D642E606060C14E69D /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9247221FC0BF42DFAFCEAB98 /* MultipeerConnectivity.framework */; };
+		304B832C2CDF19780B0B5D59 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088D3C009C053FABDF18C7B2 /* MainTabView.swift */; };
+		39D62D9B1130B8AB525077B9 /* MeshPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E08406A568EC97160BB58A /* MeshPacket.swift */; };
+		556782D2761668830EE6E980 /* MeshNetworkEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD5E1260CA07F8B8589CF5CA /* MeshNetworkEngine.swift */; };
+		6C8C706063DF77A3E1111412 /* RadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DBE945220C62D973859835D /* RadarView.swift */; };
+		82F3E9034DC7A33B8090B2A0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B8981BE02C1B9FD3400A45 /* SettingsView.swift */; };
+		967F394A9C1DD3A7BEC062D3 /* ModelSwarmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6879B39FCB364E0EADF060 /* ModelSwarmManager.swift */; };
+		ACECD697F805BDA602EAE1FE /* CrowdMeshApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB7B4CFC6E3E9B2ED596340 /* CrowdMeshApp.swift */; };
+		AD61269E3CB1E6806B7D0698 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ECF9C9BAE607D9EFEB0B4C6 /* Foundation.framework */; };
+		B51CCE54F4DCE94377775238 /* FriendCustomizationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8289F829DBBE58520DC130C /* FriendCustomizationStore.swift */; };
+		BDFB062E36E2B8D9B03A2820 /* MeshChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C968AC1C9BC3CB65FD756F3D /* MeshChatView.swift */; };
+		C037F5D67644D7A6442E4C8F /* DeviceResourceMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C136973D28CA5B3D671549 /* DeviceResourceMonitor.swift */; };
+		C4D4E800BF65A88FEC85CAEE /* DistributedComputeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7D45A29714BE8577A1F35 /* DistributedComputeEngine.swift */; };
+		C64053187993539341A89CD4 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E82EE8575A0E2434669D982B /* CoreBluetooth.framework */; };
+		C65EFEC4690B8B3B94FF5566 /* PhotosUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A88FC7454EDA7597927055 /* PhotosUI.framework */; };
+		E7E447C0FF76B0C250EAC266 /* ComputeGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A77EBE34E8803EAD4C2558BA /* ComputeGridView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		04DF4116ED9DB0655B0F778B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
-		16D3C24E3D8097F32308A346 /* DistributedComputeEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DistributedComputeEngine.swift; path = Sources/CrowdMesh/DistributedComputeEngine.swift; sourceTree = "<group>"; };
-		45C743A58059879AB12C842B /* CrowdMeshApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrowdMeshApp.swift; path = Sources/CrowdMesh/CrowdMeshApp.swift; sourceTree = "<group>"; };
-		53869FCF107124FD780252F3 /* MeshPacket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MeshPacket.swift; path = Sources/CrowdMesh/MeshPacket.swift; sourceTree = "<group>"; };
-		5D0E05E1571B03CE2F01B284 /* MeshNetworkEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MeshNetworkEngine.swift; path = Sources/CrowdMesh/MeshNetworkEngine.swift; sourceTree = "<group>"; };
-		660A84A8B7AE5CC6C9A7531F /* DeviceResourceMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceResourceMonitor.swift; path = Sources/CrowdMesh/DeviceResourceMonitor.swift; sourceTree = "<group>"; };
-		68D16CF217A0B77B874CDA29 /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Sources/CrowdMesh/SettingsView.swift; sourceTree = "<group>"; };
-		78F5890FE6E1AEC535FDEE0E /* ComputeGridView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComputeGridView.swift; path = Sources/CrowdMesh/ComputeGridView.swift; sourceTree = "<group>"; };
-		7B902358FBCFB40718341C13 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		853C84CBBBBAF42729F8B289 /* CrowdMesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrowdMesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A49003102A56750D0F848E3 /* FriendCustomizationStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FriendCustomizationStore.swift; path = Sources/CrowdMesh/FriendCustomizationStore.swift; sourceTree = "<group>"; };
-		902FABE3F09060C0D4A61383 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/PhotosUI.framework; sourceTree = DEVELOPER_DIR; };
-		9A540862592E75867BF6CC48 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = DEVELOPER_DIR; };
-		AE59F42A377ACCC4575393EC /* RadarView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarView.swift; path = Sources/CrowdMesh/RadarView.swift; sourceTree = "<group>"; };
-		B2D771CA92F40D7B5FAD0834 /* MainTabView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MainTabView.swift; path = Sources/CrowdMesh/MainTabView.swift; sourceTree = "<group>"; };
-		D589BD68E02A139A1C718F08 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
-		FDF1A362F68BC5E9BADA3D06 /* MeshChatView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MeshChatView.swift; path = Sources/CrowdMesh/MeshChatView.swift; sourceTree = "<group>"; };
+		01E08406A568EC97160BB58A /* MeshPacket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MeshPacket.swift; path = Sources/CrowdMesh/MeshPacket.swift; sourceTree = "<group>"; };
+		088D3C009C053FABDF18C7B2 /* MainTabView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MainTabView.swift; path = Sources/CrowdMesh/MainTabView.swift; sourceTree = "<group>"; };
+		1DBE945220C62D973859835D /* RadarView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RadarView.swift; path = Sources/CrowdMesh/RadarView.swift; sourceTree = "<group>"; };
+		259EFABE9FC71D85B59B60E3 /* CrowdMesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrowdMesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A6879B39FCB364E0EADF060 /* ModelSwarmManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ModelSwarmManager.swift; path = Sources/CrowdMesh/ModelSwarmManager.swift; sourceTree = "<group>"; };
+		50C136973D28CA5B3D671549 /* DeviceResourceMonitor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DeviceResourceMonitor.swift; path = Sources/CrowdMesh/DeviceResourceMonitor.swift; sourceTree = "<group>"; };
+		5B8A9DD8AFE533E62C637494 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
+		74A88FC7454EDA7597927055 /* PhotosUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PhotosUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/PhotosUI.framework; sourceTree = DEVELOPER_DIR; };
+		7BC7D45A29714BE8577A1F35 /* DistributedComputeEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DistributedComputeEngine.swift; path = Sources/CrowdMesh/DistributedComputeEngine.swift; sourceTree = "<group>"; };
+		8AB7B4CFC6E3E9B2ED596340 /* CrowdMeshApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CrowdMeshApp.swift; path = Sources/CrowdMesh/CrowdMeshApp.swift; sourceTree = "<group>"; };
+		8ECF9C9BAE607D9EFEB0B4C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		9247221FC0BF42DFAFCEAB98 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = DEVELOPER_DIR; };
+		A77EBE34E8803EAD4C2558BA /* ComputeGridView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ComputeGridView.swift; path = Sources/CrowdMesh/ComputeGridView.swift; sourceTree = "<group>"; };
+		A7B8981BE02C1B9FD3400A45 /* SettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = Sources/CrowdMesh/SettingsView.swift; sourceTree = "<group>"; };
+		AD5E1260CA07F8B8589CF5CA /* MeshNetworkEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MeshNetworkEngine.swift; path = Sources/CrowdMesh/MeshNetworkEngine.swift; sourceTree = "<group>"; };
+		C8289F829DBBE58520DC130C /* FriendCustomizationStore.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FriendCustomizationStore.swift; path = Sources/CrowdMesh/FriendCustomizationStore.swift; sourceTree = "<group>"; };
+		C968AC1C9BC3CB65FD756F3D /* MeshChatView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MeshChatView.swift; path = Sources/CrowdMesh/MeshChatView.swift; sourceTree = "<group>"; };
+		E82EE8575A0E2434669D982B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		95F6E63219F62D931A795B43 /* Frameworks */ = {
+		76240793350D5277402C32FB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3268E38A6FA9501D4AB0BFF2 /* Foundation.framework in Frameworks */,
-				B7C0B3E2842EC1DD4317F3B0 /* SwiftUI.framework in Frameworks */,
-				947605713D4BB0BC0530DAA2 /* MultipeerConnectivity.framework in Frameworks */,
-				53533ACE416D1FDB274621F8 /* CoreBluetooth.framework in Frameworks */,
-				0FE652D170F5965A3B64923E /* PhotosUI.framework in Frameworks */,
+				AD61269E3CB1E6806B7D0698 /* Foundation.framework in Frameworks */,
+				07C910448678F57ED0A45780 /* SwiftUI.framework in Frameworks */,
+				174650D642E606060C14E69D /* MultipeerConnectivity.framework in Frameworks */,
+				C64053187993539341A89CD4 /* CoreBluetooth.framework in Frameworks */,
+				C65EFEC4690B8B3B94FF5566 /* PhotosUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		06527CD34AE1E1407C0D7369 /* Frameworks */ = {
+		13846F38F878994E596C9ED8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3BFD4F9EFA12149CAB8F42B1 /* iOS */,
+				259EFABE9FC71D85B59B60E3 /* CrowdMesh.app */,
 			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		156F9FAC3407E675B99F4D71 /* Sources/CrowdMesh */ = {
+		1706ACDE43DBBB78C2BC9A4D = {
 			isa = PBXGroup;
 			children = (
-				78F5890FE6E1AEC535FDEE0E /* ComputeGridView.swift */,
-				45C743A58059879AB12C842B /* CrowdMeshApp.swift */,
-				660A84A8B7AE5CC6C9A7531F /* DeviceResourceMonitor.swift */,
-				16D3C24E3D8097F32308A346 /* DistributedComputeEngine.swift */,
-				8A49003102A56750D0F848E3 /* FriendCustomizationStore.swift */,
-				B2D771CA92F40D7B5FAD0834 /* MainTabView.swift */,
-				FDF1A362F68BC5E9BADA3D06 /* MeshChatView.swift */,
-				5D0E05E1571B03CE2F01B284 /* MeshNetworkEngine.swift */,
-				53869FCF107124FD780252F3 /* MeshPacket.swift */,
-				AE59F42A377ACCC4575393EC /* RadarView.swift */,
-				68D16CF217A0B77B874CDA29 /* SettingsView.swift */,
+				13846F38F878994E596C9ED8 /* Products */,
+				CA7923E23212A4F5DA974E9A /* Frameworks */,
+				838426A83CEDE68B7D926448 /* Sources/CrowdMesh */,
 			);
-			name = Sources/CrowdMesh;
 			sourceTree = "<group>";
 		};
-		3BFD4F9EFA12149CAB8F42B1 /* iOS */ = {
+		7842F3F8A5B240C350DEA815 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				7B902358FBCFB40718341C13 /* Foundation.framework */,
-				D589BD68E02A139A1C718F08 /* SwiftUI.framework */,
-				9A540862592E75867BF6CC48 /* MultipeerConnectivity.framework */,
-				04DF4116ED9DB0655B0F778B /* CoreBluetooth.framework */,
-				902FABE3F09060C0D4A61383 /* PhotosUI.framework */,
+				8ECF9C9BAE607D9EFEB0B4C6 /* Foundation.framework */,
+				5B8A9DD8AFE533E62C637494 /* SwiftUI.framework */,
+				9247221FC0BF42DFAFCEAB98 /* MultipeerConnectivity.framework */,
+				E82EE8575A0E2434669D982B /* CoreBluetooth.framework */,
+				74A88FC7454EDA7597927055 /* PhotosUI.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		408C405B9FF06084043AF3A7 = {
+		838426A83CEDE68B7D926448 /* Sources/CrowdMesh */ = {
 			isa = PBXGroup;
 			children = (
-				D04E9F7AAAA36C47714009E6 /* Products */,
-				06527CD34AE1E1407C0D7369 /* Frameworks */,
-				156F9FAC3407E675B99F4D71 /* Sources/CrowdMesh */,
+				A77EBE34E8803EAD4C2558BA /* ComputeGridView.swift */,
+				8AB7B4CFC6E3E9B2ED596340 /* CrowdMeshApp.swift */,
+				50C136973D28CA5B3D671549 /* DeviceResourceMonitor.swift */,
+				7BC7D45A29714BE8577A1F35 /* DistributedComputeEngine.swift */,
+				C8289F829DBBE58520DC130C /* FriendCustomizationStore.swift */,
+				088D3C009C053FABDF18C7B2 /* MainTabView.swift */,
+				C968AC1C9BC3CB65FD756F3D /* MeshChatView.swift */,
+				AD5E1260CA07F8B8589CF5CA /* MeshNetworkEngine.swift */,
+				01E08406A568EC97160BB58A /* MeshPacket.swift */,
+				4A6879B39FCB364E0EADF060 /* ModelSwarmManager.swift */,
+				1DBE945220C62D973859835D /* RadarView.swift */,
+				A7B8981BE02C1B9FD3400A45 /* SettingsView.swift */,
 			);
+			name = Sources/CrowdMesh;
 			sourceTree = "<group>";
 		};
-		D04E9F7AAAA36C47714009E6 /* Products */ = {
+		CA7923E23212A4F5DA974E9A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				853C84CBBBBAF42729F8B289 /* CrowdMesh.app */,
+				7842F3F8A5B240C350DEA815 /* iOS */,
 			);
-			name = Products;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F2E0AA48D86A2D1AAB589B31 /* CrowdMesh */ = {
+		398869C3804AB88B1AE2AB2F /* CrowdMesh */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C0BB667F1B52E6CB701D885 /* Build configuration list for PBXNativeTarget "CrowdMesh" */;
+			buildConfigurationList = B4C48435CA4C239878A8FFEF /* Build configuration list for PBXNativeTarget "CrowdMesh" */;
 			buildPhases = (
-				D09CDC59A0ECC58614633DD5 /* Sources */,
-				95F6E63219F62D931A795B43 /* Frameworks */,
-				AB429E3F95F11ABFA76DA289 /* Resources */,
+				75182D717E252EAE0AA18E07 /* Sources */,
+				76240793350D5277402C32FB /* Frameworks */,
+				3EE0C9158E6DB9B6A4EDC02D /* Resources */,
 			);
 			buildRules = (
 			);
@@ -133,19 +136,19 @@
 			);
 			name = CrowdMesh;
 			productName = CrowdMesh;
-			productReference = 853C84CBBBBAF42729F8B289 /* CrowdMesh.app */;
+			productReference = 259EFABE9FC71D85B59B60E3 /* CrowdMesh.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		0091246139CEEA639F083E0F /* Project object */ = {
+		FA4454D61C43BCAE1EE1FAE4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 			};
-			buildConfigurationList = 3F7F749482DEF8D7C151C7B0 /* Build configuration list for PBXProject "CrowdMesh" */;
+			buildConfigurationList = 9178CEE963D57157A55F2362 /* Build configuration list for PBXProject "CrowdMesh" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -153,20 +156,20 @@
 				en,
 				Base,
 			);
-			mainGroup = 408C405B9FF06084043AF3A7;
+			mainGroup = 1706ACDE43DBBB78C2BC9A4D;
 			minimizedProjectReferenceProxies = 0;
 			preferredProjectObjectVersion = 100;
-			productRefGroup = D04E9F7AAAA36C47714009E6 /* Products */;
+			productRefGroup = 13846F38F878994E596C9ED8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F2E0AA48D86A2D1AAB589B31 /* CrowdMesh */,
+				398869C3804AB88B1AE2AB2F /* CrowdMesh */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		AB429E3F95F11ABFA76DA289 /* Resources */ = {
+		3EE0C9158E6DB9B6A4EDC02D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -176,51 +179,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		D09CDC59A0ECC58614633DD5 /* Sources */ = {
+		75182D717E252EAE0AA18E07 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				069FDC5E51B51E0E267AD777 /* ComputeGridView.swift in Sources */,
-				856B624503E985A9F23CAD24 /* CrowdMeshApp.swift in Sources */,
-				D6701FC9FF11B69B374FD33B /* DeviceResourceMonitor.swift in Sources */,
-				4472A9D5133B9BACEAC2AB64 /* DistributedComputeEngine.swift in Sources */,
-				11266D31D0593709A374677E /* FriendCustomizationStore.swift in Sources */,
-				A65FF1A89A8E098741A1DE90 /* MainTabView.swift in Sources */,
-				D65E105314CD59C07664516A /* MeshChatView.swift in Sources */,
-				BAFC7B429DB065BC045DD0DE /* MeshNetworkEngine.swift in Sources */,
-				44D988F27472836196CCCE84 /* MeshPacket.swift in Sources */,
-				21D856C30D7C33B4696D81AA /* RadarView.swift in Sources */,
-				DB96387DE600D5DC365553A2 /* SettingsView.swift in Sources */,
+				E7E447C0FF76B0C250EAC266 /* ComputeGridView.swift in Sources */,
+				ACECD697F805BDA602EAE1FE /* CrowdMeshApp.swift in Sources */,
+				C037F5D67644D7A6442E4C8F /* DeviceResourceMonitor.swift in Sources */,
+				C4D4E800BF65A88FEC85CAEE /* DistributedComputeEngine.swift in Sources */,
+				B51CCE54F4DCE94377775238 /* FriendCustomizationStore.swift in Sources */,
+				304B832C2CDF19780B0B5D59 /* MainTabView.swift in Sources */,
+				BDFB062E36E2B8D9B03A2820 /* MeshChatView.swift in Sources */,
+				556782D2761668830EE6E980 /* MeshNetworkEngine.swift in Sources */,
+				39D62D9B1130B8AB525077B9 /* MeshPacket.swift in Sources */,
+				967F394A9C1DD3A7BEC062D3 /* ModelSwarmManager.swift in Sources */,
+				6C8C706063DF77A3E1111412 /* RadarView.swift in Sources */,
+				82F3E9034DC7A33B8090B2A0 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		024712C560D350A9B6609FE3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PHVD7727SU;
-				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "CrowdMesh-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.estebanavila.CrowdMesh;
-				SDKROOT = iphoneos;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		18684F2CD67278FD8D8E3C2D /* Debug */ = {
+		5591A2901C106AA06F54DA6C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -281,7 +262,7 @@
 			};
 			name = Debug;
 		};
-		B0C326FDB4A564F004CCD6D0 /* Release */ = {
+		AD8A73BCF8077C88AED69610 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -305,7 +286,30 @@
 			};
 			name = Release;
 		};
-		F16F4A6AF39C5B29319A6696 /* Release */ = {
+		F14D0ADDC4C582C7A90E5121 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = PHVD7727SU;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = "CrowdMesh-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.estebanavila.CrowdMesh;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FD21AFE38474D69E742222BE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -362,25 +366,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3F7F749482DEF8D7C151C7B0 /* Build configuration list for PBXProject "CrowdMesh" */ = {
+		9178CEE963D57157A55F2362 /* Build configuration list for PBXProject "CrowdMesh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				18684F2CD67278FD8D8E3C2D /* Debug */,
-				F16F4A6AF39C5B29319A6696 /* Release */,
+				5591A2901C106AA06F54DA6C /* Debug */,
+				FD21AFE38474D69E742222BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C0BB667F1B52E6CB701D885 /* Build configuration list for PBXNativeTarget "CrowdMesh" */ = {
+		B4C48435CA4C239878A8FFEF /* Build configuration list for PBXNativeTarget "CrowdMesh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B0C326FDB4A564F004CCD6D0 /* Release */,
-				024712C560D350A9B6609FE3 /* Debug */,
+				AD8A73BCF8077C88AED69610 /* Release */,
+				F14D0ADDC4C582C7A90E5121 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 0091246139CEEA639F083E0F /* Project object */;
+	rootObject = FA4454D61C43BCAE1EE1FAE4 /* Project object */;
 }

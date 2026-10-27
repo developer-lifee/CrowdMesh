@@ -50,6 +50,8 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
     public var onComputeJobTaskReceived: ((ComputeJobTask, String) -> Void)?
     public var onComputeJobResultReceived: ((ComputeJobResult) -> Void)?
     public var onWorkerProfileUpdated: ((ComputeWorkerProfile) -> Void)?
+    public var onModelManifestReceived: ((SwarmModelDescriptor) -> Void)?
+    public var onModelChunkReceived: ((SwarmModelChunkPacket) -> Void)?
 
     // Multipeer Connectivity
     private var session: MCSession!
@@ -227,6 +229,31 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
             sendPacket(packet)
         }
     }
+
+    public func broadcastModelManifest(_ manifest: SwarmModelDescriptor) {
+        guard let payload = try? JSONEncoder().encode(manifest) else { return }
+        let packet = MeshPacket(
+            type: .modelManifest,
+            originPeerID: myPeerID.displayName,
+            originDisplayName: myDisplayName,
+            ttl: 4,
+            payload: payload
+        )
+        sendPacket(packet)
+    }
+
+    public func requestModelShardFromPeers(modelID: String, shardIndex: Int) {
+        let reqDict = ["modelID": modelID, "shardIndex": "\(shardIndex)"]
+        guard let payload = try? JSONEncoder().encode(reqDict) else { return }
+        let packet = MeshPacket(
+            type: .modelChunkRequest,
+            originPeerID: myPeerID.displayName,
+            originDisplayName: myDisplayName,
+            ttl: 3,
+            payload: payload
+        )
+        sendPacket(packet)
+    }
 }
 
 // MARK: - MCSessionDelegate
@@ -331,6 +358,19 @@ extension MeshNetworkEngine: @preconcurrency MCSessionDelegate {
         case .computeJobResult:
             if let result = try? JSONDecoder().decode(ComputeJobResult.self, from: packet.payload) {
                 self.onComputeJobResultReceived?(result)
+            }
+
+        case .modelManifest:
+            if let manifest = try? JSONDecoder().decode(SwarmModelDescriptor.self, from: packet.payload) {
+                self.onModelManifestReceived?(manifest)
+            }
+
+        case .modelChunkRequest:
+            break
+
+        case .modelChunkData:
+            if let chunk = try? JSONDecoder().decode(SwarmModelChunkPacket.self, from: packet.payload) {
+                self.onModelChunkReceived?(chunk)
             }
 
         case .proximityBeacon:
