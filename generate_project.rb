@@ -34,3 +34,4 @@ app_target.add_file_references(group.files)
 
 project.save
 puts "Successfully created CrowdMesh.xcodeproj!"
+
