@@ -8,6 +8,7 @@ app_target = project.new_target(:application, "CrowdMesh", :ios, "17.0")
 app_target.add_system_framework("SwiftUI")
 app_target.add_system_framework("MultipeerConnectivity")
 app_target.add_system_framework("CoreBluetooth")
+app_target.add_system_framework("PhotosUI")
 
 app_target.build_configurations.each do |config|
   config.build_settings["DEVELOPMENT_TEAM"] = "PHVD7727SU"

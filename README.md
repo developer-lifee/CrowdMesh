@@ -21,7 +21,14 @@ Además, incorpora un motor de **Cómputo Distribuido (Grid Computing)**: permit
 
 ## ⚡️ Características Principales
 
-### 1. 📡 Radar de Concierto (Crowd Radar & Friend Finder)
+### 1. 📡 Radar de Concierto & Radar Dragón 🐉
+* **Modo Esferas del Dragón:** Visualiza a tus amigos en el radar como auténticas Esferas del Dragón translúcidas con brillo cristalino y estrellas rojas (de 1 a 7 estrellas con la clásica disposición geométrica, incluyendo la de 4 estrellas de Goku).
+* **Tema Retro Anime Dragon Radar:** Conmutador de tema visual entre *Cyberpunk Neon* y el clásico *Dragon Radar Verde* (retícula de cuadrícula verde, flecha direccional roja en el centro y barrido sonar ámbar/amarillo).
+* **Personalización Total de Amigos:** Toca cualquier amigo en el radar o en la lista para:
+  * Cambiar su apodo o sobrenombre en pantalla.
+  * Elegir su esfera (1 a 7 estrellas ★).
+  * Asignar un sticker / emoji festivalero (⚡️, 🎸, 🍺, 👽, 🔥, 🐲, 🍕, 🍄, 🚀, 💎, 🤘, 🕶️, etc.).
+  * **Subir Foto o PNG transparente** directamente desde la galería del iPhone (`PhotosPicker`).
 * **Localización sin cobertura:** Detección automática de amigos cercanos utilizando radios directas de Apple (**AWDL / Wi-Fi Direct + Bluetooth LE**).
 * **Círculos de Distancia:** Indicadores visuales de proximidad (*Muy cerca < 5m*, *Cerca ~10m*, *Media distancia ~25m*, *Lejos > 40m*).
 * **PING Háptico Sonar:** Envía una señal directa al iPhone de tu amigo que dispara una vibración háptica única para ubicarlo incluso en medio del ruido de la música.
