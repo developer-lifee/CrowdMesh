@@ -1,4 +1,4 @@
-# 🌐 CrowdMesh — Red Mesh P2P & Cómputo Distribuido (iOS Nativo)
+# 📡 Parche Radar — Red Mesh P2P & Cómputo Distribuido (iOS Nativo)
 
 > **Comunicación offline multi-salto para eventos masivos y supercómputo distribuido voluntario entre dispositivos móviles.**
 
@@ -13,7 +13,7 @@
 
 En festivales de música multitudinarios (como **Rock al Parque**, **Estéreo Picnic**, festivales de verano), estadios o trancones kilométricos, las antenas celulares 4G/5G colapsan de inmediato por saturación. Encontrar a tus amigos o enviar un simple mensaje de texto se vuelve imposible.
 
-**CrowdMesh** soluciona esto convirtiendo cada iPhone en un **nodo repetidor** de una red en malla descentralizada (*Peer-to-Peer*), sin requerir conexión a internet, torres celulares ni Wi-Fi público.
+**Parche Radar** soluciona esto convirtiendo cada iPhone en un **nodo repetidor** de una red en malla descentralizada (*Peer-to-Peer*), sin requerir conexión a internet, torres celulares ni Wi-Fi público.
 
 Además, incorpora un motor de **Cómputo Distribuido (Grid Computing)**: permite que los dispositivos cercanos presten voluntariamente una porción de su memoria RAM y núcleos de CPU para resolver tareas complejas (renderizado de video, simulaciones científicas o inferencia de modelos de IA) divididas en micro-bloques en paralelo.
 
@@ -119,3 +119,4 @@ CrowdMesh/
 ## 📄 Licencia
 
 Este proyecto está bajo la Licencia **MIT** — Siéntete libre de utilizarlo, modificarlo y desplegarlo en tus propios eventos.
+

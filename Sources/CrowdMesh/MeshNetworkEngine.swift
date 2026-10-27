@@ -27,13 +27,13 @@ public struct DiscoveredPeer: Identifiable {
 public final class MeshNetworkEngine: NSObject, ObservableObject {
     public static let shared = MeshNetworkEngine()
 
-    public static let serviceType = "crowd-mesh"
+    public static let serviceType = "parche-radar"
 
     // Identidad del nodo local
     @Published public var myPeerID: MCPeerID
     @Published public var myDisplayName: String {
         didSet {
-            UserDefaults.standard.set(myDisplayName, forKey: "crowdmesh_username")
+            UserDefaults.standard.set(myDisplayName, forKey: "parcheradar_username")
             restartSession()
         }
     }
@@ -61,7 +61,7 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
     private var broadcastTimer: AnyCancellable?
 
     override public init() {
-        let savedName = UserDefaults.standard.string(forKey: "crowdmesh_username") ?? UIDevice.current.name
+        let savedName = UserDefaults.standard.string(forKey: "parcheradar_username") ?? UIDevice.current.name
         self.myDisplayName = savedName
         self.myPeerID = MCPeerID(displayName: savedName)
         super.init()
@@ -138,7 +138,7 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
                 }
             }
         } catch {
-            print("[CrowdMesh] Error enviando paquete: \(error)")
+            print("[Parche Radar] Error enviando paquete: \(error)")
         }
     }
 
@@ -159,7 +159,7 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
             let data = try JSONEncoder().encode(relayed)
             try session.send(data, toPeers: destinationPeers, with: .unreliable)
         } catch {
-            print("[CrowdMesh] Error re-enviando paquete: \(error)")
+            print("[Parche Radar] Error re-enviando paquete: \(error)")
         }
     }
 

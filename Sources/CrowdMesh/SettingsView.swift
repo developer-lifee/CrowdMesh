@@ -80,7 +80,7 @@ struct SettingsView: View {
                 }
 
                 Section("Privacidad & Modo Concierto") {
-                    Text("CrowdMesh no requiere conexión a internet, datos móviles ni servidores centrales. Toda la información viaja encriptada y cifrada directamente de antena a antena entre dispositivos cercanos.")
+                    Text("Parche Radar no requiere conexión a internet, datos móviles ni servidores centrales. Toda la información viaja encriptada y cifrada directamente de antena a antena entre dispositivos cercanos.")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

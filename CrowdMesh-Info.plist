@@ -5,11 +5,11 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleDisplayName</key>
-	<string>CrowdMesh</string>
+	<string>Parche Radar</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.estebanavila.CrowdMesh</string>
 	<key>CFBundleName</key>
-	<string>CrowdMesh</string>
+	<string>Parche Radar</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -25,16 +25,16 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>CrowdMesh utiliza la red local y Wi-Fi Direct para conectar dispositivos cercanos en la red mesh sin conexión a internet.</string>
+	<string>Parche Radar utiliza la red local y Wi-Fi Direct para conectar dispositivos cercanos en la red mesh sin conexión a internet ni datos móviles.</string>
 	<key>NSBonjourServices</key>
 	<array>
-		<string>_crowd-mesh._tcp</string>
-		<string>_crowd-mesh._udp</string>
+		<string>_parche-radar._tcp</string>
+		<string>_parche-radar._udp</string>
 	</array>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>CrowdMesh utiliza Bluetooth Low Energy para descubrir amigos y nodos cercanos en conciertos y eventos masivos.</string>
+	<string>Parche Radar utiliza Bluetooth Low Energy para descubrir a tus amigos y nodos cercanos en festivales y eventos masivos.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>CrowdMesh utiliza Bluetooth para anunciar la presencia de tu dispositivo en la red mesh.</string>
+	<string>Parche Radar utiliza Bluetooth para anunciar la presencia de tu dispositivo a tu parche.</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UIApplicationSceneManifest</key>

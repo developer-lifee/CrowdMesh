@@ -34,7 +34,7 @@ struct RadarView: View {
                     .padding(.horizontal)
                 }
             }
-            .navigationTitle("Radar de Concierto")
+            .navigationTitle("Radar del Parche")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -61,10 +61,10 @@ struct RadarView: View {
     private var meshStatusBar: some View {
         HStack {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Red Mesh Descentralizada")
+                Text("Red del Parche (Sin Señal)")
                     .font(.caption.bold())
                     .foregroundStyle(.cyan)
-                Text("\(network.connectedPeers.count) dispositivos enlazados directamente")
+                Text("\(network.connectedPeers.count) amigos enlazados directamente")
                     .font(.subheadline)
                     .foregroundStyle(.white)
             }
@@ -169,7 +169,7 @@ struct RadarView: View {
 
     private var peersListSection: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Amigos y Nodos Cercanos (\(network.nearbyPeers.count))")
+            Text("Tu Parche Cercano (\(network.nearbyPeers.count))")
                 .font(.headline)
                 .foregroundStyle(.white)
 
@@ -178,10 +178,10 @@ struct RadarView: View {
                     Image(systemName: "antenna.radiowaves.left.and.right")
                         .font(.system(size: 38))
                         .foregroundStyle(.cyan.opacity(0.6))
-                    Text("Buscando amigos en la multitud...")
+                    Text("Buscando al parche en la multitud...")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
-                    Text("Cualquier iPhone con CrowdMesh abierto en el concierto se conectará automáticamente sin internet.")
+                    Text("Cualquier iPhone con Parche Radar abierto en el festival se conectará automáticamente sin internet.")
                         .font(.caption)
                         .foregroundStyle(.secondary.opacity(0.8))
                         .multilineTextAlignment(.center)
