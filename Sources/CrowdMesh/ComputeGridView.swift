@@ -33,9 +33,21 @@ struct ComputeGridView: View {
                     .padding(.horizontal)
                     .padding(.vertical, 12)
                 }
+                .scrollDismissesKeyboard(.interactively)
             }
             .navigationTitle("Enjambre IA & Video")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Button {
+                        dismissKeyboardGlobally()
+                    } label: {
+                        Label("Ocultar Teclado", systemImage: "keyboard.chevron.compact.down")
+                            .foregroundStyle(.yellow)
+                    }
+                    Spacer()
+                }
+            }
             .fileImporter(
                 isPresented: $showingFileImporter,
                 allowedContentTypes: [.data, .item, .movie, .archive],

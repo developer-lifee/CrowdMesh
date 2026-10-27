@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// Interfaz principal con pestañas para CrowdMesh
+/// Interfaz principal con pestañas para Parche Radar (CrowdMesh)
 struct MainTabView: View {
-    @State private var selectedTab: Int = 0
+    @ObservedObject var network = MeshNetworkEngine.shared
 
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: $network.selectedTabIndex) {
             RadarView()
                 .tabItem {
                     Label("Radar", systemImage: "radar")
@@ -14,7 +14,7 @@ struct MainTabView: View {
 
             MeshChatView()
                 .tabItem {
-                    Label("Chat Mesh", systemImage: "bubble.left.and.bubble.right.fill")
+                    Label("Mensajes", systemImage: "bubble.left.and.bubble.right.fill")
                 }
                 .tag(1)
 

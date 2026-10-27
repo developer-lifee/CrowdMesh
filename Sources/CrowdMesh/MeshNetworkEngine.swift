@@ -3,8 +3,14 @@ import MultipeerConnectivity
 import UIKit
 import Combine
 
+/// Utilidad global para ocultar el teclado desde cualquier vista en iOS
+@MainActor
+public func dismissKeyboardGlobally() {
+    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+}
+
 /// Información de un peer / amigo cercano en la red
-public struct DiscoveredPeer: Identifiable {
+public struct DiscoveredPeer: Identifiable, Equatable {
     public var id: String { peerID.displayName }
     public let peerID: MCPeerID
     public var displayName: String
@@ -13,6 +19,13 @@ public struct DiscoveredPeer: Identifiable {
     public var estimatedDistanceMeters: Double
     public var lastSeen: Date
     public var workerProfile: ComputeWorkerProfile?
+
+    public static func == (lhs: DiscoveredPeer, rhs: DiscoveredPeer) -> Bool {
+        lhs.id == rhs.id &&
+        lhs.displayName == rhs.displayName &&
+        lhs.isDirectlyConnected == rhs.isDirectlyConnected &&
+        lhs.hopDistance == rhs.hopDistance
+    }
 
     public var signalStrengthDescription: String {
         if estimatedDistanceMeters < 5 { return "Muy Cerca (< 5m)" }
@@ -29,11 +42,16 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
 
     public static let serviceType = "parche-radar"
 
-    // Identidad del nodo local
+    // Navegación entre pestañas y chat directo 1 a 1
+    @Published public var selectedTabIndex: Int = 0
+    @Published public var activeDirectPeerID: String? = nil   // nil = Canales grupales, o ID del amigo para Mensaje Directo 1 a 1
+
+    // Identidad única e irrepetible del nodo local
+    public let shortNodeTag: String
     @Published public var myPeerID: MCPeerID
     @Published public var myDisplayName: String {
         didSet {
-            UserDefaults.standard.set(myDisplayName, forKey: "parcheradar_username")
+            UserDefaults.standard.set(myDisplayName, forKey: "parcheradar_username_v2")
             restartSession()
         }
     }
@@ -46,7 +64,7 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
     @Published public var isRunning: Bool = false
     @Published public var totalPacketsRelayed: Int = 0
 
-    // Callbacks para el motor de cómputo
+    // Callbacks para el motor de cómputo y modelos P2P
     public var onComputeJobTaskReceived: ((ComputeJobTask, String) -> Void)?
     public var onComputeJobResultReceived: ((ComputeJobResult) -> Void)?
     public var onWorkerProfileUpdated: ((ComputeWorkerProfile) -> Void)?
@@ -63,23 +81,80 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
     private var broadcastTimer: AnyCancellable?
 
     override public init() {
-        let savedName = UserDefaults.standard.string(forKey: "parcheradar_username") ?? UIDevice.current.name
-        self.myDisplayName = savedName
-        self.myPeerID = MCPeerID(displayName: savedName)
+        // 1. Generar o recuperar un tag único por hardware para que dos iPhones jamás se confundan entre sí
+        let tagKey = "parcheradar_node_short_tag"
+        let existingTag = UserDefaults.standard.string(forKey: tagKey)
+        let resolvedTag: String
+        if let existingTag = existingTag, !existingTag.isEmpty {
+            resolvedTag = existingTag
+        } else {
+            let randomHex = String(UUID().uuidString.prefix(4)).uppercased()
+            UserDefaults.standard.set(randomHex, forKey: tagKey)
+            resolvedTag = randomHex
+        }
+        self.shortNodeTag = resolvedTag
+
+        // 2. Detectar el modelo real del iPhone (ej. "iPhone 15 Pro Max" vs "iPhone 14 Pro") en lugar del genérico "iPhone"
+        let modelFriendly = Self.detectHumanReadableModel()
+        let savedName = UserDefaults.standard.string(forKey: "parcheradar_username_v2")
+        let initialDisplayName: String
+        if let saved = savedName, !saved.isEmpty, saved.lowercased() != "iphone" {
+            initialDisplayName = saved
+        } else {
+            let autoName = "\(modelFriendly) #\(resolvedTag.prefix(2))"
+            UserDefaults.standard.set(autoName, forKey: "parcheradar_username_v2")
+            initialDisplayName = autoName
+        }
+
+        self.myDisplayName = initialDisplayName
+        self.myPeerID = MCPeerID(displayName: "\(initialDisplayName) [\(resolvedTag)]")
         super.init()
 
         setupSession()
         start()
     }
 
+    /// Traduce el identificador de hardware de Apple (ej. iPhone16,2) al nombre comercial real del equipo
+    public static func detectHumanReadableModel() -> String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let machineMirror = Mirror(reflecting: systemInfo.machine)
+        let identifier = machineMirror.children.reduce("") { id, element in
+            guard let value = element.value as? Int8, value != 0 else { return id }
+            return id + String(UnicodeScalar(UInt8(value)))
+        }
+
+        switch identifier {
+        case "iPhone16,2": return "iPhone 15 Pro Max"
+        case "iPhone16,1": return "iPhone 15 Pro"
+        case "iPhone15,4": return "iPhone 15"
+        case "iPhone15,5": return "iPhone 15 Plus"
+        case "iPhone15,2": return "iPhone 14 Pro"
+        case "iPhone15,3": return "iPhone 14 Pro Max"
+        case "iPhone14,7": return "iPhone 14"
+        case "iPhone14,8": return "iPhone 14 Plus"
+        case "iPhone17,1": return "iPhone 16 Pro"
+        case "iPhone17,2": return "iPhone 16 Pro Max"
+        case "iPhone17,3": return "iPhone 16"
+        default:
+            if identifier.hasPrefix("iPad") { return "iPad Pro" }
+            return "iPhone"
+        }
+    }
+
     private func setupSession() {
-        self.myPeerID = MCPeerID(displayName: self.myDisplayName)
+        let uniquePeerTitle = "\(self.myDisplayName) [\(self.shortNodeTag)]"
+        self.myPeerID = MCPeerID(displayName: uniquePeerTitle)
         self.session = MCSession(peer: self.myPeerID, securityIdentity: nil, encryptionPreference: .none)
         self.session.delegate = self
 
         self.advertiser = MCNearbyServiceAdvertiser(
             peer: self.myPeerID,
-            discoveryInfo: ["model": UIDevice.current.model],
+            discoveryInfo: [
+                "displayName": self.myDisplayName,
+                "nodeTag": self.shortNodeTag,
+                "model": Self.detectHumanReadableModel()
+            ],
             serviceType: Self.serviceType
         )
         self.advertiser.delegate = self
@@ -120,11 +195,24 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
         start()
     }
 
+    /// Abre directamente la pestaña de Chat en una conversación privada 1 a 1 con el amigo indicado
+    public func openDirectChat(with peer: DiscoveredPeer) {
+        self.activeDirectPeerID = peer.id
+        self.selectedTabIndex = 1
+    }
+
+    /// Limpia el sufijo técnico [XXXX] para mostrar solo el nombre limpio del amigo
+    public static func cleanName(_ rawPeerName: String) -> String {
+        if let bracketRange = rawPeerName.range(of: " [", options: .backwards) {
+            return String(rawPeerName[..<bracketRange.lowerBound])
+        }
+        return rawPeerName
+    }
+
     // MARK: - Envío de Paquetes y Enrutamiento Mesh Multi-Salto
 
     /// Envía un paquete a través de la red Mesh
     public func sendPacket(_ packet: MeshPacket) {
-        // Registrar en caché local para no reenviar si nos regresa
         seenPacketIDs.insert(packet.id)
 
         do {
@@ -159,20 +247,26 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
 
         do {
             let data = try JSONEncoder().encode(relayed)
-            try session.send(data, toPeers: destinationPeers, with: .unreliable)
+            try session.send(data, toPeers: destinationPeers, with: .reliable)
         } catch {
             print("[Parche Radar] Error re-enviando paquete: \(error)")
         }
     }
 
-    // MARK: - Funciones de Usuario (Chat, Ping, Radar)
+    // MARK: - Funciones de Usuario (Chat Grupal, Mensaje Directo 1 a 1, Ping, Radar)
 
-    /// Envía un mensaje de texto al chat offline
-    public func sendChatMessage(text: String, channel: String = "General") {
+    /// Envía un mensaje de texto (a un canal grupal o Mensaje Directo 1 a 1 a un amigo específico)
+    public func sendChatMessage(
+        text: String,
+        channel: String = "General",
+        recipientPeer: DiscoveredPeer? = nil
+    ) {
         let chatMsg = MeshChatMessage(
             senderID: myPeerID.displayName,
             senderName: myDisplayName,
-            channel: channel,
+            recipientID: recipientPeer?.id,
+            recipientName: recipientPeer?.displayName,
+            channel: recipientPeer != nil ? "Directo" : channel,
             text: text,
             hopCount: 0
         )
@@ -183,6 +277,7 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
                 type: .chatMessage,
                 originPeerID: myPeerID.displayName,
                 originDisplayName: myDisplayName,
+                targetPeerID: recipientPeer?.id, // nil = Todos, o el ID del amigo para DM privado
                 ttl: 4,
                 payload: payload
             )
@@ -191,13 +286,13 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
     }
 
     /// Envía un "Ping" haptic a un amigo para que su iPhone vibre y sepa que estás cerca
-    public func sendFriendPing(to peerDisplayName: String) {
-        let payload = peerDisplayName.data(using: .utf8) ?? Data()
+    public func sendFriendPing(to targetPeerID: String) {
+        let payload = myDisplayName.data(using: .utf8) ?? Data()
         let packet = MeshPacket(
             type: .friendPing,
             originPeerID: myPeerID.displayName,
             originDisplayName: myDisplayName,
-            targetPeerID: peerDisplayName,
+            targetPeerID: targetPeerID,
             ttl: 3,
             payload: payload
         )
@@ -260,16 +355,19 @@ public final class MeshNetworkEngine: NSObject, ObservableObject {
 extension MeshNetworkEngine: @preconcurrency MCSessionDelegate {
     public func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         Task { @MainActor in
+            // Ignorar si por alguna razón es nuestro propio peerID
+            guard peerID.displayName != self.myPeerID.displayName else { return }
+
             switch state {
             case .connected:
                 if !self.connectedPeers.contains(peerID) {
                     self.connectedPeers.append(peerID)
                 }
-                // Actualizar radar
-                let simulatedDist = Double.random(in: 4.0...25.0)
+                let simulatedDist = Double.random(in: 3.5...18.0)
+                let cleanDisplay = Self.cleanName(peerID.displayName)
                 self.nearbyPeers[peerID.displayName] = DiscoveredPeer(
                     peerID: peerID,
-                    displayName: peerID.displayName,
+                    displayName: cleanDisplay,
                     isDirectlyConnected: true,
                     hopDistance: 1,
                     estimatedDistanceMeters: simulatedDist,
@@ -294,17 +392,14 @@ extension MeshNetworkEngine: @preconcurrency MCSessionDelegate {
         guard let packet = try? JSONDecoder().decode(MeshPacket.self, from: data) else { return }
 
         Task { @MainActor in
-            // Deduplicación: si ya vimos este ID de paquete, ignorarlo
             guard !self.seenPacketIDs.contains(packet.id) else { return }
             self.seenPacketIDs.insert(packet.id)
 
-            // Si el paquete no es solo para mí o es broadcast, ayudar a retransmitirlo (Mesh Relay)
             let isForMe = packet.targetPeerID == nil || packet.targetPeerID == self.myPeerID.displayName
             if packet.targetPeerID != self.myPeerID.displayName {
                 self.relayPacket(packet, incomingFrom: peerID)
             }
 
-            // Procesar si me concierne
             if isForMe {
                 self.processPacketPayload(packet)
             }
@@ -315,30 +410,37 @@ extension MeshNetworkEngine: @preconcurrency MCSessionDelegate {
         switch packet.type {
         case .chatMessage:
             if let msg = try? JSONDecoder().decode(MeshChatMessage.self, from: packet.payload) {
+                // Evitar duplicar si yo mismo fui el emisor
+                guard msg.senderID != self.myPeerID.displayName else { return }
+                // Si es un mensaje directo privado para otra persona, no mostrarlo aquí
+                if let recID = msg.recipientID, recID != self.myPeerID.displayName {
+                    return
+                }
                 var updatedMsg = msg
                 updatedMsg.hopCount = packet.hops
                 self.chatMessages.append(updatedMsg)
-                // Vibración sutil
-                let gen = UIImpactFeedbackGenerator(style: .light)
+                let gen = UIImpactFeedbackGenerator(style: .medium)
                 gen.impactOccurred()
             }
 
         case .friendPing:
             self.receivedPings.append(packet.originDisplayName)
-            // Vibración háptica fuerte tipo sonar para encontrar amigos en concierto ruidoso
             let generator = UINotificationFeedbackGenerator()
             generator.notificationOccurred(.warning)
 
         case .computeOffer:
             if let profile = try? JSONDecoder().decode(ComputeWorkerProfile.self, from: packet.payload) {
+                guard profile.peerID != self.myPeerID.displayName else { return }
+                let cleanDisplay = Self.cleanName(profile.displayName)
                 if var existing = self.nearbyPeers[profile.peerID] {
+                    existing.displayName = cleanDisplay
                     existing.workerProfile = profile
                     existing.lastSeen = Date()
                     self.nearbyPeers[profile.peerID] = existing
                 } else {
                     let newPeer = DiscoveredPeer(
                         peerID: MCPeerID(displayName: profile.peerID),
-                        displayName: profile.displayName,
+                        displayName: cleanDisplay,
                         isDirectlyConnected: false,
                         hopDistance: packet.hops + 1,
                         estimatedDistanceMeters: Double(packet.hops + 1) * 15.0,
@@ -386,7 +488,6 @@ extension MeshNetworkEngine: @preconcurrency MCSessionDelegate {
 // MARK: - MCNearbyServiceAdvertiserDelegate
 extension MeshNetworkEngine: @preconcurrency MCNearbyServiceAdvertiserDelegate {
     public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        // En una red mesh de conciertos libre, aceptamos automáticamente conexiones de pares cercanos
         invitationHandler(true, self.session)
     }
 }
@@ -394,7 +495,7 @@ extension MeshNetworkEngine: @preconcurrency MCNearbyServiceAdvertiserDelegate {
 // MARK: - MCNearbyServiceBrowserDelegate
 extension MeshNetworkEngine: @preconcurrency MCNearbyServiceBrowserDelegate {
     public func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?) {
-        // Invitar al nuevo par para formar la malla
+        guard peerID.displayName != self.myPeerID.displayName else { return }
         browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
     }
 

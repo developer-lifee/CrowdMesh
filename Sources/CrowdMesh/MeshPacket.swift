@@ -45,20 +45,36 @@ public struct MeshPacket: Codable, Identifiable {
     }
 }
 
-/// Estructura de un mensaje de chat offline
+/// Estructura de un mensaje de chat offline (Grupal o Mensaje Directo 1 a 1)
 public struct MeshChatMessage: Codable, Identifiable {
     public let id: String
-    public let senderID: String
-    public let senderName: String
-    public let channel: String       // "General", "Emergencias", "Privado"
+    public let senderID: String          // UUID único del nodo emisor
+    public let senderName: String        // Nombre visible del emisor
+    public let recipientID: String?      // nil = Canal público, o nodeID del amigo receptor en Mensaje Directo
+    public let recipientName: String?    // Nombre visible del receptor (ej: "iPhone 14 Pro" o "Todos")
+    public let channel: String           // "General", "Emergencias", "Tarima" o "Directo"
     public let text: String
     public let timestamp: Date
     public var hopCount: Int
 
-    public init(senderID: String, senderName: String, channel: String = "General", text: String, hopCount: Int = 0) {
+    public var isDirectMessage: Bool {
+        recipientID != nil
+    }
+
+    public init(
+        senderID: String,
+        senderName: String,
+        recipientID: String? = nil,
+        recipientName: String? = nil,
+        channel: String = "General",
+        text: String,
+        hopCount: Int = 0
+    ) {
         self.id = UUID().uuidString
         self.senderID = senderID
         self.senderName = senderName
+        self.recipientID = recipientID
+        self.recipientName = recipientName
         self.channel = channel
         self.text = text
         self.timestamp = Date()

@@ -415,7 +415,7 @@ struct RadarView: View {
 
                         Spacer()
 
-                        HStack(spacing: 8) {
+                        HStack(spacing: 6) {
                             // Botón de Editar Avatar / Nombre
                             Button {
                                 editingPeer = peer
@@ -425,20 +425,37 @@ struct RadarView: View {
                                     .foregroundStyle(.yellow)
                             }
 
+                            // Botón de Mensaje Directo 1 a 1
+                            Button {
+                                network.openDirectChat(with: peer)
+                                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            } label: {
+                                HStack(spacing: 3) {
+                                    Image(systemName: "bubble.left.fill")
+                                    Text("CHAT")
+                                        .bold()
+                                }
+                                .font(.caption2)
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 9)
+                                .padding(.vertical, 6)
+                                .background(Color.cyan.opacity(0.85), in: Capsule())
+                            }
+
                             // Botón de Ping Haptic
                             Button {
-                                network.sendFriendPing(to: peer.displayName)
+                                network.sendFriendPing(to: peer.id)
                                 let gen = UIImpactFeedbackGenerator(style: .medium)
                                 gen.impactOccurred()
                             } label: {
-                                HStack(spacing: 4) {
+                                HStack(spacing: 3) {
                                     Image(systemName: "bell.badge.fill")
                                     Text("PING")
                                         .bold()
                                 }
-                                .font(.caption)
+                                .font(.caption2)
                                 .foregroundStyle(.black)
-                                .padding(.horizontal, 10)
+                                .padding(.horizontal, 9)
                                 .padding(.vertical, 6)
                                 .background(Color.yellow, in: Capsule())
                             }
@@ -474,9 +491,28 @@ struct EditFriendCustomizationView: View {
                 Color(red: 0.05, green: 0.08, blue: 0.12).ignoresSafeArea()
 
                 ScrollView {
-                    VStack(spacing: 24) {
+                    VStack(spacing: 20) {
                         // Vista previa interactiva
                         previewCard
+
+                        // Botón rápido para ir a Mensaje Directo 1 a 1 con este amigo
+                        Button {
+                            dismiss()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                MeshNetworkEngine.shared.openDirectChat(with: peer)
+                            }
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: "bubble.left.and.bubble.right.fill")
+                                Text("Enviar Mensaje Directo a \(nickname.isEmpty ? peer.displayName : nickname)")
+                                    .font(.subheadline.bold())
+                            }
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(Color.cyan.opacity(0.25), in: RoundedRectangle(cornerRadius: 12))
+                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.cyan, lineWidth: 1))
+                        }
 
                         // Campo de Apodo Personalizado
                         nicknameSection
@@ -513,18 +549,39 @@ struct EditFriendCustomizationView: View {
                     }
                     .padding()
                 }
+                .scrollDismissesKeyboard(.interactively)
             }
             .navigationTitle("Personalizar Amigo")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Button("Cancelar") { dismiss() }
-                        .foregroundStyle(.secondary)
+                    Button {
+                        dismissKeyboardGlobally()
+                        dismiss()
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "chevron.left")
+                            Text("Atrás")
+                        }
+                        .foregroundStyle(.yellow)
+                    }
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Listo") { saveCustomization() }
-                        .font(.headline)
-                        .foregroundStyle(.yellow)
+                    Button("Guardar") {
+                        dismissKeyboardGlobally()
+                        saveCustomization()
+                    }
+                    .font(.headline)
+                    .foregroundStyle(.yellow)
+                }
+                ToolbarItemGroup(placement: .keyboard) {
+                    Button {
+                        dismissKeyboardGlobally()
+                    } label: {
+                        Label("Ocultar Teclado", systemImage: "keyboard.chevron.compact.down")
+                            .foregroundStyle(.yellow)
+                    }
+                    Spacer()
                 }
             }
             .onAppear {

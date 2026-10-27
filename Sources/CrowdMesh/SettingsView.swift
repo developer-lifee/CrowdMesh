@@ -5,30 +5,44 @@ struct SettingsView: View {
     @ObservedObject var network = MeshNetworkEngine.shared
     @ObservedObject var monitor = DeviceResourceMonitor.shared
     @State private var tempName: String = ""
+    @FocusState private var isNameFocused: Bool
 
     var body: some View {
         NavigationStack {
             Form {
-                Section("Identidad en la Malla") {
-                    HStack {
-                        Text("Nombre visible:")
-                        Spacer()
-                        TextField("Tu apodo o nombre", text: $tempName)
-                            .multilineTextAlignment(.trailing)
-                            .foregroundStyle(.cyan)
-                            .onSubmit {
-                                if !tempName.isEmpty {
-                                    network.myDisplayName = tempName
+                Section("Identidad de tu Celular en la Malla") {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Nombre con el que te ven tus amigos:")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+
+                        HStack {
+                            TextField("Ej: Esteban, Goku, Dani...", text: $tempName)
+                                .focused($isNameFocused)
+                                .submitLabel(.done)
+                                .foregroundStyle(.cyan)
+                                .font(.body.bold())
+                                .onSubmit {
+                                    saveName()
                                 }
+
+                            if !tempName.isEmpty && tempName != network.myDisplayName {
+                                Button("Guardar") {
+                                    saveName()
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .tint(.cyan)
+                                .font(.caption.bold())
                             }
+                        }
                     }
 
                     HStack {
-                        Text("ID de Nodo:")
+                        Text("Código Único de Antena:")
                         Spacer()
-                        Text(network.myPeerID.displayName.prefix(12) + "...")
-                            .font(.caption.monospaced())
-                            .foregroundStyle(.secondary)
+                        Text("#\(network.shortNodeTag)")
+                            .font(.subheadline.monospaced().bold())
+                            .foregroundStyle(.yellow)
                     }
                 }
 
@@ -40,11 +54,11 @@ struct SettingsView: View {
                     .tint(.cyan)
 
                     HStack {
-                        Text("Tipo de Red:")
+                        Text("Amigos conectados ahora:")
                         Spacer()
-                        Text("Apple Multipeer (BLE + Wi-Fi Direct)")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                        Text("\(network.connectedPeers.count)")
+                            .font(.subheadline.bold())
+                            .foregroundStyle(.green)
                     }
 
                     HStack {
@@ -58,9 +72,9 @@ struct SettingsView: View {
 
                 Section("Hardware del Dispositivo") {
                     HStack {
-                        Text("Modelo:")
+                        Text("Modelo Real:")
                         Spacer()
-                        Text(monitor.deviceModelName)
+                        Text(MeshNetworkEngine.detectHumanReadableModel())
                             .foregroundStyle(.secondary)
                     }
 
@@ -78,18 +92,39 @@ struct SettingsView: View {
                             .foregroundStyle(.secondary)
                     }
                 }
-
-                Section("Privacidad & Modo Concierto") {
-                    Text("Parche Radar no requiere conexión a internet, datos móviles ni servidores centrales. Toda la información viaja encriptada y cifrada directamente de antena a antena entre dispositivos cercanos.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
             }
+            .scrollDismissesKeyboard(.interactively)
             .navigationTitle("Ajustes del Nodo")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Button {
+                        isNameFocused = false
+                        dismissKeyboardGlobally()
+                    } label: {
+                        Label("Ocultar Teclado", systemImage: "keyboard.chevron.compact.down")
+                            .foregroundStyle(.yellow)
+                    }
+                    Spacer()
+                    Button("Guardar Nombre") {
+                        saveName()
+                    }
+                    .bold()
+                    .foregroundStyle(.cyan)
+                }
+            }
             .onAppear {
                 tempName = network.myDisplayName
             }
         }
+    }
+
+    private func saveName() {
+        let trimmed = tempName.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmed.isEmpty {
+            network.myDisplayName = trimmed
+        }
+        isNameFocused = false
+        dismissKeyboardGlobally()
     }
 }
